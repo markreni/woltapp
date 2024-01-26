@@ -1,0 +1,30 @@
+name: woltmobile2024
+description: A new Flutter project.
+
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+version: 1.0.0+1
+environment:
+  sdk: ">=3.1.5 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  flutter_riverpod: ^2.4.0
+  http: ^1.1.0
+  shared_preferences: ^2.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter:
+  # the material Icons class.
+  uses-material-design: true
+
+  fonts:
+    - family: Omnes
+      fonts:
+        - asset: assets/fonts/Omnes-Bold.otf
