@@ -1,13 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:woltmobile2024/utils/coordinates.dart';
+import 'dart:async';
 import '../providers/providers.dart';
 import '../widgets/venue_card.dart';
 
-class VenueScreen extends ConsumerWidget {
+class VenueScreen extends ConsumerStatefulWidget {
   const VenueScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<VenueScreen> createState() => _VenueScreenState();
+}
+
+class _VenueScreenState extends ConsumerState<VenueScreen> {
+  int counter = 0;
+  @override
+  void initState() {
+    super.initState();
+    // Timer for updating coordinates every 10sec
+    Timer.periodic(
+        const Duration(seconds: 10),
+        (Timer t) => {
+              counter = (counter + 1) % coordinates.length,
+              ref
+                  .watch(locationProvider.notifier)
+                  .update((state) => coordinates[counter])
+            });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final venueFuture = ref.watch(venueFutureProvider);
 
     if (venueFuture.isLoading) {
@@ -26,6 +48,7 @@ class VenueScreen extends ConsumerWidget {
     }
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text("Wolt"),
         backgroundColor: const Color.fromARGB(255, 8, 196, 236),

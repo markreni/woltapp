@@ -2,11 +2,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/venue.dart';
 import '../services/venue_service.dart';
+import '../utils/coordinates.dart';
+
+final locationProvider = StateProvider<Map>((ref) => coordinates[0]);
 
 // Provider for listing venues when api response data is ready
 final venueFutureProvider = FutureProvider<List<Venue>>(
   (ref) async {
-    return await VenueService().getVenues(60.170187, 24.930599);
+    final location = ref.watch(locationProvider);
+    return await VenueService().getVenues(location['lat'], location['long']);
   },
 );
 
