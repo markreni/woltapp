@@ -1,27 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../providers/providers.dart';
 
-class VenueCard extends StatelessWidget {
+class VenueCard extends ConsumerWidget {
   final String name;
   final String description;
   final String imageURL;
+  final String id;
 
   const VenueCard({
     required this.name,
     required this.description,
     required this.imageURL,
+    required this.id,
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final favoriteList = ref.watch(favoriteProvider);
+
     return Column(
       children: [
         Container(
+          margin: const EdgeInsets.only(top: 20),
           decoration: BoxDecoration(
             color: Colors.white70,
             borderRadius: BorderRadius.circular(8),
           ),
-          height: 115,
+          height: 120,
           //margin: const EdgeInsets.all(8),
           //padding: const EdgeInsets.all(8),
           child: Row(
@@ -61,19 +68,38 @@ class VenueCard extends StatelessWidget {
                             fontWeight: FontWeight.w900, fontSize: 16),
                       ),
                     ),
-                    Text(
-                      description,
-                      textAlign: TextAlign.left,
-                      style: const TextStyle(fontWeight: FontWeight.w500),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 5),
+                        child: SingleChildScrollView(
+                          child: Text(
+                            description,
+                            textAlign: TextAlign.left,
+                            style: const TextStyle(fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                      ),
                     )
                   ],
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
-                child: Icon(
-                  Icons.favorite,
-                  size: 35,
+              Padding(
+                padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+                child: GestureDetector(
+                  onTap: () => {
+                    ref.watch(favoriteProvider.notifier).updateFavorite(id),
+                  },
+                  child: Container(
+                    child: favoriteList.contains(id)
+                        ? const Icon(
+                            Icons.favorite,
+                            size: 35,
+                          )
+                        : const Icon(
+                            Icons.favorite_border,
+                            size: 35,
+                          ),
+                  ),
                 ),
               )
             ],

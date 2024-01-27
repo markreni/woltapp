@@ -73,7 +73,8 @@ class VenueScreen extends ConsumerWidget {
                 .map((venue) => VenueCard(
                     name: venue.name,
                     description: venue.description,
-                    imageURL: venue.imageURL))
+                    imageURL: venue.imageURL,
+                    id: venue.id))
                 .toList(),
           ),
         ),
