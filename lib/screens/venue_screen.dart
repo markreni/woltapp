@@ -16,6 +16,8 @@ class VenueScreen extends ConsumerWidget {
           child: Text(
             "Loading...",
             style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w300,
               fontSize: 35.0,
             ),
           ),
@@ -29,44 +31,23 @@ class VenueScreen extends ConsumerWidget {
         backgroundColor: const Color.fromARGB(255, 8, 196, 236),
         titleSpacing: 50,
         titleTextStyle: const TextStyle(fontSize: 30, fontFamily: 'Omnes'),
-        /*
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Image.asset(
-            "../assets/Wolt_logo_black.png",
-            fit: BoxFit.contain,
-            scale: 0.1,
-          ),
-        ),
-        */
-        /*
-        actions: [
-          IconButton(
-            iconSize: 50,
-            onPressed: () => {},
-            icon: const Text(
-              "Stats",
-              style: TextStyle(
-                fontSize: 15.0,
-              ),
-            ),
-          ),
-        ],
-        */
       ),
       body: Center(
         child: venueFuture.when(
           loading: () => const Text(
             "Loading...",
             style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w300,
               fontSize: 35.0,
             ),
           ),
           error: (err, stack) => const Text(
             "Error loading venues",
             style: TextStyle(
-              fontSize: 35.0,
-            ),
+                color: Colors.white,
+                fontWeight: FontWeight.w300,
+                fontSize: 35.0),
           ),
           data: (venues) => ListView(
             children: venues

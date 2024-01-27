@@ -17,6 +17,17 @@ main() async {
         debugShowCheckedModeBanner: false,
         home: const VenueScreen(),
         theme: ThemeData(
+          /*
+            textTheme: const TextTheme(
+                    bodyLarge: TextStyle(),
+                    bodyMedium: TextStyle(),
+                    )
+                .apply(
+                    bodyColor: Colors.white,
+                    displayColor: Colors.blue,
+                    fontSizeFactor: 1.5),
+                    */
+            scaffoldBackgroundColor: const Color.fromARGB(255, 8, 196, 236),
             colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)),
       ),
     ),

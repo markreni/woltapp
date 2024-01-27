@@ -60,7 +60,10 @@ class VenueCard extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 7),
+                      padding: const EdgeInsets.only(
+                        bottom: 7,
+                        top: 23,
+                      ),
                       child: Text(
                         name,
                         textAlign: TextAlign.left,
