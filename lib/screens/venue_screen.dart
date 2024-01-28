@@ -3,7 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../providers/providers.dart';
 import '../widgets/venue_card.dart';
-import '../utils/helpers.dart' as helpers;
+import '../utils/helpers.dart';
+import '../utils/styles.dart';
 
 class VenueScreen extends ConsumerStatefulWidget {
   const VenueScreen({super.key});
@@ -13,6 +14,8 @@ class VenueScreen extends ConsumerStatefulWidget {
 }
 
 class _VenueScreenState extends ConsumerState<VenueScreen> {
+  final helpers = Helpers();
+
   @override
   void initState() {
     super.initState();
@@ -22,6 +25,7 @@ class _VenueScreenState extends ConsumerState<VenueScreen> {
   @override
   void dispose() {
     super.dispose();
+    helpers.cancelTimer();
   }
 
   @override
@@ -49,6 +53,14 @@ class _VenueScreenState extends ConsumerState<VenueScreen> {
           ),
         ),
       );
+    } else {
+      WidgetsBinding.instance.addPostFrameCallback((_) => {
+            if (!ref.read(infoProvider))
+              {
+                helpers.showInSnackBar(context, ref,
+                    "Refresh venues by double tapping the screen"),
+              }
+          });
     }
 
     return Scaffold(
@@ -60,7 +72,7 @@ class _VenueScreenState extends ConsumerState<VenueScreen> {
             'assets/wolt_logo_white.png',
             fit: BoxFit.contain),
         centerTitle: true,
-        backgroundColor: const Color.fromARGB(255, 76, 178, 225),
+        backgroundColor: CustomDesign().mainColor,
       ),
       body: GestureDetector(
         onDoubleTap: () => {

@@ -133,12 +133,12 @@ class VenueCard extends ConsumerWidget {
                         ? const Icon(
                             Icons.favorite,
                             size: 35,
-                            color: const Color.fromARGB(255, 76, 178, 225),
+                            color: Color.fromARGB(255, 76, 178, 225),
                           )
                         : const Icon(
                             Icons.favorite_border,
                             size: 35,
-                            color: const Color.fromARGB(255, 76, 178, 225),
+                            color: Color.fromARGB(255, 76, 178, 225),
                           ),
                   ),
                 ),

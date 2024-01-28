@@ -1,27 +1,57 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:async';
 import 'package:woltmobile2024/providers/providers.dart';
 import 'package:woltmobile2024/utils/coordinates.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../utils/styles.dart';
 
-void _saveCounter(int counter) async {
-  final prefs = await SharedPreferences.getInstance();
-  prefs.setInt('counter', counter);
-}
+class Helpers {
+  Timer? timer;
 
-void updateCoordinates(WidgetRef ref) {
-  int counter = ref.read(counterProvider);
-  // Timer for updating coordinates every 10sec
-  Timer.periodic(
+  void _saveCounter(int counter) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setInt('counter', counter);
+  }
+
+  void updateCoordinates(WidgetRef ref) {
+    int counter = ref.read(counterProvider);
+    // Timer for updating coordinates every 10sec
+    timer = Timer.periodic(
       const Duration(seconds: 10),
       (Timer t) => {
-            counter = (counter + 1) % coordinates.length,
-            _saveCounter(counter),
-          });
-}
+        counter = (counter + 1) % coordinates.length,
+        _saveCounter(counter),
+      },
+    );
+  }
 
-void updateScreen(WidgetRef ref) async {
-  final prefs = await SharedPreferences.getInstance();
-  final currentCounter = prefs.getInt('counter')!;
-  ref.read(counterProvider.notifier).state = currentCounter;
+  void cancelTimer() {
+    timer!.cancel();
+  }
+
+  void updateScreen(WidgetRef ref) async {
+    final prefs = await SharedPreferences.getInstance();
+    final currentCounter = prefs.getInt('counter')!;
+    ref.read(counterProvider.notifier).state = currentCounter;
+  }
+
+  void showInSnackBar(BuildContext context, WidgetRef ref, value) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(value),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(22), topRight: Radius.circular(22))),
+      backgroundColor: CustomDesign().mainColor,
+      action: SnackBarAction(
+        textColor: Colors.white,
+        label: "OK",
+        onPressed: () {
+          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+          ref.watch(infoProvider.notifier).state = true;
+        },
+      ),
+      duration: const Duration(days: 365),
+    ));
+  }
 }

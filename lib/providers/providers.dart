@@ -4,6 +4,16 @@ import '../utils/venue.dart';
 import '../services/venue_service.dart';
 import '../utils/coordinates.dart';
 
+// Provider for showing snackbar only when the user sees the venues screen for the first time
+final infoProvider = StateProvider<bool>((ref) {
+  final prefs = ref.watch(sharedPreferencesProvider);
+  final infoSeen = prefs.getBool('info') ?? false;
+  ref.listenSelf((prev, cur) {
+    prefs.setBool('info', cur);
+  });
+  return infoSeen;
+});
+
 // Provider for coordinates counter
 final counterProvider = StateProvider<int>(
   (ref) {
