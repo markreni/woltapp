@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:woltmobile2024/utils/coordinates.dart';
-import 'dart:async';
 import '../providers/providers.dart';
 import '../widgets/venue_card.dart';
+import '../utils/helpers.dart' as helpers;
 
 class VenueScreen extends ConsumerStatefulWidget {
   const VenueScreen({super.key});
@@ -13,19 +12,15 @@ class VenueScreen extends ConsumerStatefulWidget {
 }
 
 class _VenueScreenState extends ConsumerState<VenueScreen> {
-  int counter = 0;
   @override
   void initState() {
     super.initState();
-    // Timer for updating coordinates every 10sec
-    Timer.periodic(
-        const Duration(seconds: 10),
-        (Timer t) => {
-              counter = (counter + 1) % coordinates.length,
-              ref
-                  .watch(locationProvider.notifier)
-                  .update((state) => coordinates[counter])
-            });
+    helpers.updateCoordinates(ref);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -55,7 +50,10 @@ class _VenueScreenState extends ConsumerState<VenueScreen> {
         titleSpacing: 50,
         titleTextStyle: const TextStyle(fontSize: 30, fontFamily: 'Omnes'),
       ),
-      body: Center(
+      body: GestureDetector(
+        onDoubleTap: () => {
+          helpers.updateScreen(ref),
+        },
         child: venueFuture.when(
           loading: () => const Text(
             "Loading...",
@@ -75,10 +73,13 @@ class _VenueScreenState extends ConsumerState<VenueScreen> {
           data: (venues) => ListView(
             children: venues
                 .map((venue) => VenueCard(
-                    name: venue.name,
-                    description: venue.description,
-                    imageURL: venue.imageURL,
-                    id: venue.id))
+                      name: venue.name,
+                      description: venue.description,
+                      imageURL: venue.imageURL,
+                      id: venue.id,
+                      distance: venue.distance,
+                      rating: venue.rating,
+                    ))
                 .toList(),
           ),
         ),

@@ -4,13 +4,21 @@ import '../utils/venue.dart';
 import '../services/venue_service.dart';
 import '../utils/coordinates.dart';
 
-final locationProvider = StateProvider<Map>((ref) => coordinates[0]);
+// Provider for coordinates counter
+final counterProvider = StateProvider<int>(
+  (ref) {
+    final prefs = ref.watch(sharedPreferencesProvider);
+    final currentCounter = prefs.getInt('counter') ?? 0;
+    return currentCounter;
+  },
+);
 
 // Provider for listing venues when api response data is ready
 final venueFutureProvider = FutureProvider<List<Venue>>(
   (ref) async {
-    final location = ref.watch(locationProvider);
-    return await VenueService().getVenues(location['lat'], location['long']);
+    final counter = ref.watch(counterProvider);
+    final location = coordinates[counter];
+    return await VenueService().getVenues(location['lat']!, location['long']!);
   },
 );
 

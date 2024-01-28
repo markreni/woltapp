@@ -7,12 +7,16 @@ class VenueCard extends ConsumerWidget {
   final String description;
   final String imageURL;
   final String id;
+  final int distance;
+  final double rating;
 
   const VenueCard({
     required this.name,
     required this.description,
     required this.imageURL,
     required this.id,
+    required this.distance,
+    required this.rating,
     super.key,
   });
 
@@ -82,7 +86,39 @@ class VenueCard extends ConsumerWidget {
                           ),
                         ),
                       ),
-                    )
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        bottom: 5,
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.place_outlined,
+                            size: 15,
+                          ),
+                          Text(
+                            "${distance}m",
+                            textAlign: TextAlign.left,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.w100, fontSize: 15),
+                          ),
+                          const SizedBox(
+                            width: 15,
+                          ),
+                          const Icon(
+                            Icons.stars_outlined,
+                            size: 15,
+                          ),
+                          Text(
+                            "$rating/10",
+                            textAlign: TextAlign.left,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.w100, fontSize: 15),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),

@@ -19,7 +19,9 @@ class VenueService {
             'id': itemData['venue']['id'],
             'name': itemData['venue']['name'],
             'description': itemData['venue']['short_description'],
-            'image': itemData['image']['url']
+            'image': itemData['image']['url'],
+            'distance': itemData['sorting']['sortables'][3]['value'],
+            'rating': itemData['venue']['rating']['score']
           },
         ),
       ),
