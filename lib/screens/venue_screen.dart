@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../providers/providers.dart';
 import '../widgets/venue_card.dart';
 import '../utils/helpers.dart' as helpers;
@@ -28,8 +29,25 @@ class _VenueScreenState extends ConsumerState<VenueScreen> {
     final venueFuture = ref.watch(venueFutureProvider);
 
     if (venueFuture.isLoading) {
-      return const Scaffold(
+      return Scaffold(
         body: Center(
+          child: SpinKitFadingCircle(
+            size: 160,
+            itemBuilder: (
+              BuildContext context,
+              int index,
+            ) {
+              return DecoratedBox(
+                decoration: BoxDecoration(
+                  color: index.isEven
+                      ? const Color.fromARGB(199, 27, 141, 166)
+                      : const Color.fromARGB(198, 42, 143, 166),
+                  shape: BoxShape.circle,
+                ),
+              );
+            },
+          ),
+          /*
           child: Text(
             "Loading...",
             style: TextStyle(
@@ -38,6 +56,7 @@ class _VenueScreenState extends ConsumerState<VenueScreen> {
               fontSize: 35.0,
             ),
           ),
+          */
         ),
       );
     }
