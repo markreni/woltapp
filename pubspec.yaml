@@ -25,7 +25,5 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-  fonts:
-    - family: Omnes
-      fonts:
-        - asset: assets/fonts/Omnes-Bold.otf
+  assets:
+    - assets/wolt_logo_white.png

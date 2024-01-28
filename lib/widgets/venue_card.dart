@@ -133,10 +133,12 @@ class VenueCard extends ConsumerWidget {
                         ? const Icon(
                             Icons.favorite,
                             size: 35,
+                            color: const Color.fromARGB(255, 76, 178, 225),
                           )
                         : const Icon(
                             Icons.favorite_border,
                             size: 35,
+                            color: const Color.fromARGB(255, 76, 178, 225),
                           ),
                   ),
                 ),
@@ -149,7 +151,7 @@ class VenueCard extends ConsumerWidget {
           indent: 120,
           endIndent: 20,
           height: 0,
-        )
+        ),
       ],
     );
   }

@@ -17,7 +17,7 @@ main() async {
         debugShowCheckedModeBanner: false,
         home: const VenueScreen(),
         theme: ThemeData(
-            scaffoldBackgroundColor: const Color.fromARGB(255, 8, 196, 236),
+            scaffoldBackgroundColor: const Color.fromARGB(255, 76, 178, 225),
             colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)),
       ),
     ),

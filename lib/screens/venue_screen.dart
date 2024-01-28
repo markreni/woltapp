@@ -47,16 +47,6 @@ class _VenueScreenState extends ConsumerState<VenueScreen> {
               );
             },
           ),
-          /*
-          child: Text(
-            "Loading...",
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w300,
-              fontSize: 35.0,
-            ),
-          ),
-          */
         ),
       );
     }
@@ -64,10 +54,13 @@ class _VenueScreenState extends ConsumerState<VenueScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text("Wolt"),
-        backgroundColor: const Color.fromARGB(255, 8, 196, 236),
-        titleSpacing: 50,
-        titleTextStyle: const TextStyle(fontSize: 30, fontFamily: 'Omnes'),
+        title: Image.asset(
+            width: 90,
+            height: 90,
+            'assets/wolt_logo_white.png',
+            fit: BoxFit.contain),
+        centerTitle: true,
+        backgroundColor: const Color.fromARGB(255, 76, 178, 225),
       ),
       body: GestureDetector(
         onDoubleTap: () => {
