@@ -35,21 +35,35 @@ class _VenueScreenState extends ConsumerState<VenueScreen> {
     if (venueFuture.isLoading) {
       return Scaffold(
         body: Center(
-          child: SpinKitFadingCircle(
-            size: 160,
-            itemBuilder: (
-              BuildContext context,
-              int index,
-            ) {
-              return DecoratedBox(
-                decoration: BoxDecoration(
-                  color: index.isEven
-                      ? const Color.fromARGB(199, 27, 141, 166)
-                      : const Color.fromARGB(198, 42, 143, 166),
-                  shape: BoxShape.circle,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Opacity(
+                opacity: 0.5,
+                child: Image.asset(
+                  'assets/wolt_logo_white.png',
+                  height: 270,
+                  width: 270,
                 ),
-              );
-            },
+              ),
+              const SizedBox(height: 50),
+              SpinKitFadingCircle(
+                size: 160,
+                itemBuilder: (
+                  BuildContext context,
+                  int index,
+                ) {
+                  return DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: index.isEven
+                          ? const Color.fromARGB(199, 27, 141, 166)
+                          : const Color.fromARGB(198, 42, 143, 166),
+                      shape: BoxShape.circle,
+                    ),
+                  );
+                },
+              ),
+            ],
           ),
         ),
       );
@@ -57,8 +71,7 @@ class _VenueScreenState extends ConsumerState<VenueScreen> {
       WidgetsBinding.instance.addPostFrameCallback((_) => {
             if (!ref.read(infoProvider))
               {
-                helpers.showInSnackBar(context, ref,
-                    "Refresh venues by double tapping the screen"),
+                helpers.showInfoSnackBar(context, ref),
               }
           });
     }
@@ -79,20 +92,13 @@ class _VenueScreenState extends ConsumerState<VenueScreen> {
           helpers.updateScreen(ref),
         },
         child: venueFuture.when(
-          loading: () => const Text(
+          loading: () => Text(
             "Loading...",
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w300,
-              fontSize: 35.0,
-            ),
+            style: CustomDesign().screenStyle,
           ),
-          error: (err, stack) => const Text(
+          error: (err, stack) => Text(
             "Error loading venues",
-            style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w300,
-                fontSize: 35.0),
+            style: CustomDesign().screenStyle,
           ),
           data: (venues) => ListView(
             children: venues

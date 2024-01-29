@@ -33,12 +33,12 @@ class Helpers {
   void updateScreen(WidgetRef ref) async {
     final prefs = await SharedPreferences.getInstance();
     final currentCounter = prefs.getInt('counter')!;
-    ref.read(counterProvider.notifier).state = currentCounter;
+    ref.watch(counterProvider.notifier).state = currentCounter;
   }
 
-  void showInSnackBar(BuildContext context, WidgetRef ref, value) {
+  void showInfoSnackBar(BuildContext context, WidgetRef ref) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(value),
+      content: const Text("Refresh venues by double tapping the screen"),
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(22), topRight: Radius.circular(22))),

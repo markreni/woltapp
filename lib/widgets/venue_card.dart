@@ -27,14 +27,12 @@ class VenueCard extends ConsumerWidget {
     return Column(
       children: [
         Container(
-          margin: const EdgeInsets.only(top: 20),
+          margin: const EdgeInsets.only(top: 10),
           decoration: BoxDecoration(
             color: Colors.white70,
             borderRadius: BorderRadius.circular(8),
           ),
-          height: 120,
-          //margin: const EdgeInsets.all(8),
-          //padding: const EdgeInsets.all(8),
+          height: 125,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -93,28 +91,40 @@ class VenueCard extends ConsumerWidget {
                       ),
                       child: Row(
                         children: [
-                          const Icon(
-                            Icons.place_outlined,
-                            size: 15,
+                          const Tooltip(
+                            message: "Distance to the venue",
+                            child: Icon(
+                              Icons.place_outlined,
+                              size: 15,
+                            ),
                           ),
-                          Text(
-                            "${distance}m",
-                            textAlign: TextAlign.left,
-                            style: const TextStyle(
-                                fontWeight: FontWeight.w100, fontSize: 15),
+                          Tooltip(
+                            message: "Distance to the venue",
+                            child: Text(
+                              "${distance}m",
+                              textAlign: TextAlign.left,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.w200, fontSize: 15),
+                            ),
                           ),
                           const SizedBox(
                             width: 15,
                           ),
-                          const Icon(
-                            Icons.stars_outlined,
-                            size: 15,
+                          const Tooltip(
+                            message: "Venue rating",
+                            child: Icon(
+                              Icons.stars_outlined,
+                              size: 15,
+                            ),
                           ),
-                          Text(
-                            "$rating/10",
-                            textAlign: TextAlign.left,
-                            style: const TextStyle(
-                                fontWeight: FontWeight.w100, fontSize: 15),
+                          Tooltip(
+                            message: "Venue rating",
+                            child: Text(
+                              "$rating/10",
+                              textAlign: TextAlign.left,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.w200, fontSize: 15),
+                            ),
                           ),
                         ],
                       ),
@@ -128,18 +138,21 @@ class VenueCard extends ConsumerWidget {
                   onTap: () => {
                     ref.watch(favoriteProvider.notifier).updateFavorite(id),
                   },
-                  child: Container(
-                    child: favoriteList.contains(id)
-                        ? const Icon(
-                            Icons.favorite,
-                            size: 35,
-                            color: Color.fromARGB(255, 76, 178, 225),
-                          )
-                        : const Icon(
-                            Icons.favorite_border,
-                            size: 35,
-                            color: Color.fromARGB(255, 76, 178, 225),
-                          ),
+                  child: Tooltip(
+                    message: "Add to favorites",
+                    child: Container(
+                      child: favoriteList.contains(id)
+                          ? const Icon(
+                              Icons.favorite,
+                              size: 35,
+                              color: Color.fromARGB(255, 76, 178, 225),
+                            )
+                          : const Icon(
+                              Icons.favorite_border,
+                              size: 35,
+                              color: Color.fromARGB(255, 76, 178, 225),
+                            ),
+                    ),
                   ),
                 ),
               )
