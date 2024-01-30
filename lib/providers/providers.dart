@@ -27,7 +27,7 @@ final counterProvider = StateProvider<int>(
 final venueFutureProvider = FutureProvider<List<Venue>>(
   (ref) async {
     final counter = ref.watch(counterProvider);
-    final location = coordinates[counter];
+    final location = locations[counter];
     return await VenueService().getVenues(location['lat']!, location['long']!);
   },
 );

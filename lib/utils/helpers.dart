@@ -20,7 +20,7 @@ class Helpers {
     timer = Timer.periodic(
       const Duration(seconds: 10),
       (Timer t) => {
-        counter = (counter + 1) % coordinates.length,
+        counter = (counter + 1) % locations.length,
         _saveCounter(counter),
       },
     );
@@ -38,7 +38,9 @@ class Helpers {
 
   void showInfoSnackBar(BuildContext context, WidgetRef ref) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: const Text("Refresh venues by double tapping the screen"),
+      content: const Padding(
+          padding: EdgeInsets.only(right: 50),
+          child: Text("Refresh venues by double tapping the screen")),
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(22), topRight: Radius.circular(22))),

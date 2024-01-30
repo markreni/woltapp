@@ -1,4 +1,4 @@
-const coordinates = [
+const locations = [
   {'lat': 60.170187, 'long': 24.930599},
   {'lat': 60.169418, 'long': 24.931618},
   {'lat': 60.169818, 'long': 24.932906},
