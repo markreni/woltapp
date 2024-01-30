@@ -15,6 +15,6 @@ Whether you're a local seeking new dining hotspots or a traveler craving authent
   - The button functions as a toggle (true/false) and changes the icon depending on the state.
   - Favorite states are reapplied to venues when the app is reopened.
 
-  !(loading screen of the Wolt app)[wolt-loading-screen.png]
+  ![Loading screen of the Wolt app](wolt-loading-screen.png)
 
-  !(venues screen of the Wolt app)[wolt-venues-screen.png]
+  ![Venues screen of the Wolt app](wolt-venues-screen.png)
