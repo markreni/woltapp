@@ -23,6 +23,8 @@ class VenueCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final favoriteList = ref.watch(favoriteProvider);
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
 
     return Column(
       children: [
@@ -32,7 +34,7 @@ class VenueCard extends ConsumerWidget {
             color: Colors.white70,
             borderRadius: BorderRadius.circular(8),
           ),
-          height: 125,
+          height: height * 0.17,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -133,7 +135,7 @@ class VenueCard extends ConsumerWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+                padding: EdgeInsets.fromLTRB(width * 0.08, 0, 30, 0),
                 child: GestureDetector(
                   onTap: () => {
                     ref.watch(favoriteProvider.notifier).updateFavorite(id),

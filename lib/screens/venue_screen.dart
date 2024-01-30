@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'dart:math';
 import '../providers/providers.dart';
 import '../widgets/venue_card.dart';
 import '../utils/helpers.dart';
@@ -31,39 +32,42 @@ class _VenueScreenState extends ConsumerState<VenueScreen> {
   @override
   Widget build(BuildContext context) {
     final venueFuture = ref.watch(venueFutureProvider);
+    final height = MediaQuery.of(context).size.height;
 
     if (venueFuture.isLoading) {
       return Scaffold(
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Opacity(
-                opacity: 0.5,
-                child: Image.asset(
-                  'assets/wolt_logo_white.png',
-                  height: 270,
-                  width: 270,
+          child: Padding(
+            padding: EdgeInsets.only(top: height * 0.1),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Opacity(
+                  opacity: 0.5,
+                  child: Image.asset(
+                    'assets/wolt_logo_white.png',
+                    width: height * 0.45,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 50),
-              SpinKitFadingCircle(
-                size: 160,
-                itemBuilder: (
-                  BuildContext context,
-                  int index,
-                ) {
-                  return DecoratedBox(
-                    decoration: BoxDecoration(
-                      color: index.isEven
-                          ? const Color.fromARGB(199, 27, 141, 166)
-                          : const Color.fromARGB(198, 42, 143, 166),
-                      shape: BoxShape.circle,
-                    ),
-                  );
-                },
-              ),
-            ],
+                SizedBox(height: height * 0.055),
+                SpinKitFadingCircle(
+                  size: height * 0.23,
+                  itemBuilder: (
+                    BuildContext context,
+                    int index,
+                  ) {
+                    return DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: index.isEven
+                            ? const Color.fromARGB(199, 27, 141, 166)
+                            : const Color.fromARGB(198, 42, 143, 166),
+                        shape: BoxShape.circle,
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       );
@@ -79,9 +83,9 @@ class _VenueScreenState extends ConsumerState<VenueScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        toolbarHeight: max(height * 0.065, 40),
         title: Image.asset(
-            width: 90,
-            height: 90,
+            width: max(height * 0.115, 70),
             'assets/wolt_logo_white.png',
             fit: BoxFit.contain),
         centerTitle: true,

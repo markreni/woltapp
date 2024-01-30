@@ -62,5 +62,6 @@ final favoriteProvider =
   return ids;
 });
 
+// Provider for sharedPreferences
 final sharedPreferencesProvider =
     Provider<SharedPreferences>((ref) => throw UnimplementedError());
