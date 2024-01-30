@@ -46,10 +46,10 @@ class _VenueScreenState extends ConsumerState<VenueScreen> {
                   opacity: 0.5,
                   child: Image.asset(
                     'assets/wolt_logo_white.png',
-                    width: height * 0.45,
+                    width: height * 0.35,
                   ),
                 ),
-                SizedBox(height: height * 0.055),
+                SizedBox(height: height * 0.1),
                 SpinKitFadingCircle(
                   size: height * 0.23,
                   itemBuilder: (

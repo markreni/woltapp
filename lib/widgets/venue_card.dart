@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:woltmobile2024/widgets/heart_button.dart';
 import '../providers/providers.dart';
 
 class VenueCard extends ConsumerWidget {
@@ -136,25 +137,18 @@ class VenueCard extends ConsumerWidget {
               ),
               Padding(
                 padding: EdgeInsets.fromLTRB(width * 0.08, 0, 30, 0),
-                child: GestureDetector(
-                  onTap: () => {
-                    ref.watch(favoriteProvider.notifier).updateFavorite(id),
-                  },
-                  child: Tooltip(
-                    message: "Add to favorites",
-                    child: Container(
-                      child: favoriteList.contains(id)
-                          ? const Icon(
-                              Icons.favorite,
-                              size: 35,
-                              color: Color.fromARGB(255, 76, 178, 225),
-                            )
-                          : const Icon(
-                              Icons.favorite_border,
-                              size: 35,
-                              color: Color.fromARGB(255, 76, 178, 225),
-                            ),
-                    ),
+                child: Tooltip(
+                  message: "Add to favorites",
+                  child: Container(
+                    child: favoriteList.contains(id)
+                        ? HeartButton(
+                            id: id,
+                            liked: true,
+                          )
+                        : HeartButton(
+                            id: id,
+                            liked: false,
+                          ),
                   ),
                 ),
               )
